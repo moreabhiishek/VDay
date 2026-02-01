@@ -7,6 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Pacifico&display=swap" rel="stylesheet">
 </head>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h2>Oops 😏</h2>
+    <p>This is not a valid option 💖</p>
+    <button onclick="closeModal()">Okay 💘</button>
+  </div>
+</div>
+
 <body>
 
 <div class="hearts"></div>
@@ -16,10 +25,10 @@
 
     <div class="buttons">
         <a href="/yes">
-            <button class="yes" onmouseover="burstHearts(event)">Yes 💖</button>
+            <button class="yes" onmouseover="burstHearts(event)" onclick="playClick()">Yes 💖</button>
         </a>
 
-        <button class="no" onmouseover="moveNo()" onclick="hideNo()">No 💔</button>
+        <button class="no" onmouseover="moveNo()" onclick="invalidOption()">No 💔</button>
     </div>
 </div>
 
@@ -33,6 +42,31 @@ function hideNo() {
     const x = Math.random() * 300 - 150;
     const y = Math.random() * 200 - 100;
     btn.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+/*function invalidOption() {
+    alert("This is not a valid option 😏💖");
+    document.getElementsByClassName('no')[0].style="display:none !important;";
+}*/
+
+    function invalidOption() {
+    const modal = document.getElementById("modal");
+    modal.style.display = "flex";
+
+    for (let i = 0; i < 15; i++) {
+        const s = document.createElement("div");
+        s.className = "sparkle";
+        s.style.left = Math.random() * window.innerWidth + "px";
+        s.style.top = Math.random() * window.innerHeight + "px";
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 1000);
+    }
+
+    playClick();
+}
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
 }
 
 function burstHearts(e) {
@@ -57,7 +91,16 @@ for (let i = 0; i < 30; i++) {
     heart.style.animationDuration = (3 + Math.random() * 5) + "s";
     heartsContainer.appendChild(heart);
 }
+
+function playClick() {
+    document.getElementById("clickSound").play();
+}
 </script>
+
+<audio id="clickSound">
+    <source src="https://assets.mixkit.co/sfx/preview/mixkit-game-click-1114.mp3" type="audio/mpeg">
+</audio>
+
 
 </body>
 </html>
