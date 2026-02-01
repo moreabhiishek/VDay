@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Be My Valentine?</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="hearts"></div>
+
+<div class="container">
+    <h1>Ridhiiiii, Will You Be My Valentine? 💘</h1>
+
+    <div class="buttons">
+        <a href="/yes">
+            <button class="yes">Yes 💖</button>
+        </a>
+
+        <button class="no" onclick="hideNo()">No 💔</button>
+    </div>
+</div>
+
+<script>
+function hideNo() {
+    document.querySelector('.no').style.display = "none";
+}
+
+// Floating hearts
+const heartsContainer = document.querySelector('.hearts');
+for (let i = 0; i < 30; i++) {
+    let heart = document.createElement('span');
+    heart.innerHTML = '💗';
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (3 + Math.random() * 5) + "s";
+    heartsContainer.appendChild(heart);
+}
+</script>
+
+</body>
+</html>
