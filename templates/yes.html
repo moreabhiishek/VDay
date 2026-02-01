@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Yay!</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+
+<div class="container">
+    <h1>Yayyyy! 💖</h1>
+    <h2>Ridhiiiii is my Valentine!!! 🎉🥰</h2>
+</div>
+
+<script>
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let pieces = [];
+for (let i = 0; i < 200; i++) {
+    pieces.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 6 + 2,
+        speed: Math.random() * 3 + 1
+    });
+}
+
+function draw() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach(p => {
+        ctx.fillStyle = "hsl(" + Math.random()*360 + ",100%,50%)";
+        ctx.fillRect(p.x,p.y,p.size,p.size);
+        p.y += p.speed;
+        if (p.y > canvas.height) p.y = 0;
+    });
+    requestAnimationFrame(draw);
+}
+draw();
+</script>
+
+</body>
+</html>
