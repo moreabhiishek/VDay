@@ -55,3 +55,30 @@ canvas {
     top:0;
     left:0;
 }
+
+.love-msg {
+    font-size: 22px;
+    color: #b0004d;
+    margin-top: 20px;
+}
+
+.burst-heart {
+    position: absolute;
+    font-size: 24px;
+    animation: burst 1s ease-out forwards;
+}
+
+@keyframes burst {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(
+            calc(-100px + 200px * random()),
+            -150px
+        );
+        opacity: 0;
+    }
+}
+
