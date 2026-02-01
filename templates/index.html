@@ -24,51 +24,52 @@
     <h1>Ridhiiiii, Will You Be My Valentine? 💘</h1>
 
     <div class="buttons">
-        <a href="/yes">
-            <button class="yes" onmouseover="burstHearts(event)" onclick="playClick()">Yes 💖</button>
-        </a>
+       <button class="yes" onmouseover="burstHearts(event)" onclick="goYes()">
+            Yes 💖
+        </button>
 
-        <button class="no" onmouseover="moveNo()" onclick="invalidOption()">No 💔</button>
+        <button class="no" onmouseover="moveNo()" onclick="invalidOption()">
+            No 💔
+        </button>
     </div>
 </div>
 
 <script>
-function hideNo() {
-    document.querySelector('.no').style.display = "none";
+/* YES NAVIGATION */
+function goYes() {
+    playClick();
+    window.location.href = "/yes";
 }
 
-    function moveNo() {
+/* PLAY SOUND */
+function playClick() {
+    const sound = document.getElementById("clickSound");
+    sound.currentTime = 0;
+    sound.play().catch(()=>{});
+}
+
+/* NO BUTTON MOVE */
+function moveNo() {
     const btn = document.querySelector('.no');
     const x = Math.random() * 300 - 150;
     const y = Math.random() * 200 - 100;
     btn.style.transform = `translate(${x}px, ${y}px)`;
 }
 
-/*function invalidOption() {
-    alert("This is not a valid option 😏💖");
-    document.getElementsByClassName('no')[0].style="display:none !important;";
-}*/
-
-    function invalidOption() {
+/* OPEN MODAL */
+function invalidOption() {
     const modal = document.getElementById("modal");
     modal.style.display = "flex";
-
-    for (let i = 0; i < 15; i++) {
-        const s = document.createElement("div");
-        s.className = "sparkle";
-        s.style.left = Math.random() * window.innerWidth + "px";
-        s.style.top = Math.random() * window.innerHeight + "px";
-        document.body.appendChild(s);
-        setTimeout(() => s.remove(), 1000);
-    }
-
     playClick();
+    createSparkles();
 }
 
+/* CLOSE MODAL */
 function closeModal() {
     document.getElementById("modal").style.display = "none";
 }
 
+/* HEART BURST */
 function burstHearts(e) {
     for (let i = 0; i < 10; i++) {
         const heart = document.createElement("div");
@@ -77,23 +78,30 @@ function burstHearts(e) {
         heart.style.left = e.clientX + "px";
         heart.style.top = e.clientY + "px";
         document.body.appendChild(heart);
-
         setTimeout(() => heart.remove(), 1000);
     }
 }
 
-// Floating hearts
-const heartsContainer = document.querySelector('.hearts');
-for (let i = 0; i < 30; i++) {
-    let heart = document.createElement('span');
-    heart.innerHTML = '💗';
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (3 + Math.random() * 5) + "s";
-    heartsContainer.appendChild(heart);
+/* SPARKLES */
+function createSparkles() {
+    for (let i = 0; i < 20; i++) {
+        const s = document.createElement("div");
+        s.className = "sparkle";
+        s.style.left = Math.random() * window.innerWidth + "px";
+        s.style.top = Math.random() * window.innerHeight + "px";
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 1000);
+    }
 }
 
-function playClick() {
-    document.getElementById("clickSound").play();
+/* FLOATING HEARTS */
+const heartsContainer = document.querySelector('.hearts');
+for (let i = 0; i < 25; i++) {
+    const heart = document.createElement('span');
+    heart.innerHTML = '💗';
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (4 + Math.random() * 5) + "s";
+    heartsContainer.appendChild(heart);
 }
 </script>
 
